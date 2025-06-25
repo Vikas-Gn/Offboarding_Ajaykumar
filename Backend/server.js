@@ -126,9 +126,9 @@ pool.connect()
     console.log('✅ Connected to database');
     initializeDatabase().then(() => {
       app.listen(port, () => {
-        console.log(`🚀 Server running on http://localhost:${port}`);
-        console.log(`📄 Offboarding Form: http://localhost:${port}/offboarding.html`);
-        console.log(`📊 HR Offboarding Dashboard: http://localhost:${port}/hrOffboarding.html`);
+        console.log(`🚀 Server running on http://65.2.149.3:${port}`);
+        console.log(`📄 Offboarding Form: http://65.2.149.3:${port}/offboarding.html`);
+        console.log(`📊 HR Offboarding Dashboard: http://65.2.149.3:${port}/hrOffboarding.html`);
       });
     });
   })
