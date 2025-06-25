@@ -1,0 +1,55 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:14
+    container_name: postgres-offboarding
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: admin123
+      POSTGRES_DB: new_employee_db
+    ports:
+      - "5022:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - app-net
+
+  backend:
+    build: ./Backend
+    container_name: Backend8
+    depends_on:
+      - postgres
+    ports:
+      - "3054:3054"
+    networks:
+      - app-net
+    environment:
+      - DB_HOST=postgres
+      - DB_USER=postgres
+      - DB_PASSWORD=admin123
+      - DB_NAME=new_employee_db
+
+  frontend:
+    build: ./Frontend
+    container_name: Frontend2
+    ports:
+      - "8073:80"
+    networks:
+      - app-net
+
+  hr_page:
+    build: ./Hr_page
+    container_name: HR_page2
+    ports:
+      - "8074:80"
+    networks:
+      - app-net
+
+volumes:
+  postgres_data:
+
+networks:
+  app-net:
+
